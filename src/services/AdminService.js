@@ -7,5 +7,9 @@ const url='http://localhost:8081/';
     login(user){ 
         return axios.post(url + "login", user);    
       }
+
+    getAdminById(id){
+      return axios.get(url + "admin/"+id);
+    }  
 }
 export default new AdminService

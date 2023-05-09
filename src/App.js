@@ -1,7 +1,8 @@
 import './App.css';
 import {BrowserRouter as Router,Route,Routes} from 'react-router-dom';
 import LoginComponent from './components/LoginComponent';
-import DashboardComponent from './components/DashboardComponent';
+import NavbarComponent from './components/NavbarComponent';
+import VacancyComponent from './components/VacancyComponent';
 
 function App() {
   return (
@@ -12,9 +13,13 @@ function App() {
               <Routes>
               
               <Route path="/" exact element={<LoginComponent/>}></Route>
-              <Route path="/dashboard" exact element={<DashboardComponent/>}></Route>
-              
 
+              </Routes>
+
+              <Routes>
+                 
+                 
+                  <Route path="/vacancy" element={<> <NavbarComponent/><VacancyComponent/></>}></Route>
               </Routes>
               </div>
       </router>

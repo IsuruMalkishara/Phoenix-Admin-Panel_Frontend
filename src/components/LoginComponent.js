@@ -25,7 +25,7 @@ export default function LoginComponent() {
         sessionStorage.setItem("userId",JSON.stringify(res.data.id));
         sessionStorage.setItem("userType",JSON.stringify(res.data.userType));
         console.warn("Login")
-       navigate("/dashboard");
+       navigate("/vacancy");
         }).catch(error=>{
             console.warn("Incorrect Email or Password");
             console.warn(error);
