@@ -1,0 +1,16 @@
+.login {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+  }
+  
+  .login-card {
+    width: 25rem;
+    text-align: center;
+    margin: 20px;
+  }
+
+  .login-btn{
+    margin-top: 10px;
+  }
