@@ -1,8 +1,9 @@
 import {React}  from 'react';
 import { useState } from 'react'
 import { useNavigate} from 'react-router-dom';
-import { Container,Card, Form, Button } from 'react-bootstrap';
+import { Card, Form, Button } from 'react-bootstrap';
 import AdminService from '../services/AdminService';
+import { ReactComponent as UserIcon } from '../assets/user.svg'
 
 import '../styles/LoginComponent.css'
 
@@ -38,14 +39,16 @@ export default function LoginComponent() {
         
        
        <div className='login'>
-       <Card className='login-card' >
+       <Card className='login-card' style={{ backgroundColor: 'rgba(255, 255, 255, 0.301)' }}>
       
       <Card.Body >
-        <h3>Login Here</h3>
+      <UserIcon fill="rgba(255, 255, 255, 0.9)" style={{ width: '30px', height: '30px' }} />
+        <h3 className='label'>Login Here</h3>
         <Form onSubmit={userLogin}>
           <Form.Group controlId="formBasicUserName">
-            <Form.Label>User Name</Form.Label>
+            <Form.Label className='label'>User Name</Form.Label>
             <Form.Control
+            className='input'
             type="text"
             placeholder="Enter User Name"
             value={userName}
@@ -54,8 +57,9 @@ export default function LoginComponent() {
           </Form.Group>
 
           <Form.Group controlId="formBasicPassword">
-            <Form.Label>Password</Form.Label>
-            <Form.Control
+            <Form.Label className='label'>Password</Form.Label>
+            <Form.Control 
+            className='input'
             type="password"
             placeholder="Password"
             value={password}
@@ -63,13 +67,13 @@ export default function LoginComponent() {
           />
           </Form.Group>
 
-         <div className='login-btn'>
+         
           
-          <Button variant="primary" type="submit">
+          <Button className='login-btn' variant="primary" type="submit">
             LOGIN
           </Button>
          
-         </div>
+         
           
         </Form>
       </Card.Body>
