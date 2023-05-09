@@ -27,7 +27,7 @@ export default function NavbarComponent() {
 
     getAdmin() }, []);
 
-
+//get admin data
 const getAdmin=()=>{
 
   AdminService.getAdminById(adminId).then(res=>{
@@ -38,9 +38,7 @@ const getAdmin=()=>{
       console.warn("Profile picture is  null");
     }else{
       setProfilePicture(res.data.profilePicture);
-    }
-    
-    
+    }  
 
   }).catch(error =>{
     console.log(error);
@@ -48,7 +46,7 @@ const getAdmin=()=>{
 
 
 }
-//logout
+//logout function
 const handleLogout = () => {
   sessionStorage.clear();
   navigate(-2);
