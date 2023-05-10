@@ -39,7 +39,7 @@ export default function LoginComponent() {
         
        
        <div className='login'>
-       <Card className='login-card' style={{ backgroundColor: 'rgba(255, 255, 255, 0.301)' }}>
+       <Card className='login-card' style={{ backgroundColor: 'rgba(255, 255, 255, 0.301)',width:'25rem' }}>
       
       <Card.Body >
       <UserIcon fill="rgba(255, 255, 255, 0.9)" style={{ width: '30px', height: '30px' }} />

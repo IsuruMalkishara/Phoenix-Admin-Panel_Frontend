@@ -1,0 +1,28 @@
+.vacancy {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    background: linear-gradient(to right, rgb(47, 102, 86), rgb(2, 69, 145));
+  }
+  
+  .title {
+    margin-bottom: 20px;
+    text-align: center;
+    color: aliceblue;
+  }
+  
+  .vacancy-table {
+    width: 100%;
+  }
+
+  .card{
+    width: 90%;
+  }
+
+  .pagination {
+    display: flex;
+    justify-content: center;
+    margin-top: 2px;
+  }
