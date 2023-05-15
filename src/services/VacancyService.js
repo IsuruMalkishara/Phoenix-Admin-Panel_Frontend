@@ -19,5 +19,9 @@ const url='http://localhost:8081/';
     updateVacancy(id,data){
         return axios.put(url+"vacancy/"+id,data);
     }
+
+    getVacancyByEmpoyerId(id){
+        return axios.get(url+"vacancies/"+id);
+    }
 }
 export default new VacancyService

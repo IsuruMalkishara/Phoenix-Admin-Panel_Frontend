@@ -44,11 +44,11 @@ export default function VacancyComponent() {
     
     }
 
-    // //navigate to view vacancy page
-    // const handleViewVacancy = (vacancyId) => {
-    //   console.warn("vacancy id: "+vacancyId);
-    //   navigate('/vacancy/'+vacancyId);
-    // };
+    //navigate to view vacancy page
+    const handleViewVacancy = (employerId) => {
+      console.warn("Employer id: "+employerId);
+      navigate('/employer/'+employerId+'/vacancy');
+    };
 
     //display vacancy in table
     const displayEmployers = employers
@@ -68,7 +68,7 @@ export default function VacancyComponent() {
         <td>{employer.email}</td>
         <td>{employer.verification ? <VerifiedUserIcon /> : <ReportIcon />}</td>
         <td>
-        <IconButton >
+        <IconButton onClick={() => handleViewVacancy(employer.id)}>
             <FeedbackIcon />
         </IconButton>
         </td>
