@@ -1,4 +1,4 @@
-.vacancy {
+.request {
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -13,7 +13,7 @@
     color: aliceblue;
   }
   
-  .vacancy-table {
+  .request-table {
     width: 100%;
   }
 

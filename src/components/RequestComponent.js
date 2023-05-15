@@ -1,64 +1,73 @@
 import React, {useState,useEffect } from 'react';
-import { useNavigate} from 'react-router-dom';
+import { useNavigate,useParams} from 'react-router-dom';
 import Table from "react-bootstrap/Table";
 import ReactPaginate from "react-paginate";
 import Card from 'react-bootstrap/Card';
-import VisibilityIcon from '@mui/icons-material/Visibility';
-import IconButton from '@mui/material/IconButton';
+import RequestService from '../services/RequestService';
 import VacancyService from '../services/VacancyService';
-import '../styles/VacancyComponent.css'
+import '../styles/RequestComponent.css';
 
-
-export default function VacancyComponent() {
-
-    const [vacancies, setVacancies]=useState([]);
+export default function RequestComponent() {
+    const [requests, setRequests]=useState([]);
+    const [vacancy, setVacancy]=useState('');
+    const [employer,setEmployer]=useState('');
 
     const [pageNumber, setPageNumber] = useState(0);
 
     const navigate = useNavigate();
 
-    const jobsPerPage = 6;
-    const pagesVisited = pageNumber * jobsPerPage;
-    const pageCount = Math.ceil(vacancies.length / jobsPerPage);
+    const { id } = useParams();
+
+    const requestsPerPage = 6;
+    const pagesVisited = pageNumber * requestsPerPage;
+    const pageCount = Math.ceil(requests.length / requestsPerPage);
 
     useEffect(() => {
 
-        getAllVacancy() }, []);
+        getAllRequest(id);
+        getVacancyById(id);
+         }, []);
+
+   
     
     //get vacancies data
-    const getAllVacancy=()=>{
+    const getAllRequest=(id)=>{
     
-      VacancyService.getAllVacancy().then(res=>{
+      RequestService.getAllRequest(id).then(res=>{
         console.warn(res.data);
-          setVacancies(res.data);
+          setRequests(res.data);
     
       }).catch(error =>{
         console.log(error);
-    }) 
+    })
+}
+    //get vacancy by id
+    const getVacancyById=(id)=>{
+    
+        VacancyService.getVacancyById(id).then(res=>{
+          console.warn(res.data);
+            setVacancy(res.data.title);
+            setEmployer(res.data.employer.name)
+      
+        }).catch(error =>{
+          console.log(error);
+      })
     
     
     }
 
-    //navigate to view vacancy page
-    const handleViewVacancy = (vacancyId) => {
-      console.warn("vacancy id: "+vacancyId);
-      navigate('/vacancy/'+vacancyId);
-    };
+    
 
-    //display vacancy in table
-    const displayJobs = vacancies
-    .slice(pagesVisited, pagesVisited + jobsPerPage)
-    .map((vacancy,index) => (
-      <tr key={vacancy.id}>
+    //display request in table
+    const displayRequests = requests
+    .slice(pagesVisited, pagesVisited + requestsPerPage)
+    .map((request,index) => (
+      <tr key={request.id}>
         <td >{index + 1}</td>
-        <td>{vacancy.title}</td>
-        <td>{vacancy.employer.name}</td>
-        <td >{vacancy.numOfRequests}</td>
-        <td>
-        <IconButton onClick={() => handleViewVacancy(vacancy.id)}>
-            <VisibilityIcon />
-        </IconButton>
-        </td>
+        <td>{request.jobSeeker.firstName}</td>
+        <td>{request.jobSeeker.lastName}</td>
+        <td >{request.jobSeeker.position}</td>
+        
       </tr>
     ));
 
@@ -68,29 +77,29 @@ export default function VacancyComponent() {
     
         return (
             <>
-            <div className='vacancy'>
+            <div className='request'>
             <Card className='card' style={{ backgroundColor: 'rgba(255, 255, 255, 0.301)' }}>
         <Card.Body>
                 <div className='row'>
                     <div className='col'>
-                    <div className='title'><h3>Vacancies</h3></div>
+                    <div className='title'><h3>{vacancy}</h3></div>
+                    <div className='title'><h5>{employer}</h5></div>
                     </div>
                
                 </div>
                 <div className='row'>
                 <div className='col'>
-            <div className='vacancy-table'>
+            <div className='request-table'>
       <Table  style={{ backgroundColor: 'rgb(3, 122, 126)',color:'#ffff' }}>
         <thead  style={{ backgroundColor: 'rgb(103, 4, 122)',color:'#ffff' }}>
           <tr>
           <th>Number</th>
-            <th>Title</th>
-            <th>Employer</th>
-            <th>Number of Requests</th>
-            <th>View</th>
+            <th>First Name</th>
+            <th>Last Name</th>
+            <th>Position</th>
           </tr>
         </thead>
-        <tbody>{displayJobs}</tbody>
+        <tbody>{displayRequests}</tbody>
       </Table>
       
       </div>
@@ -121,4 +130,6 @@ export default function VacancyComponent() {
         );
     
 }
+
+
 

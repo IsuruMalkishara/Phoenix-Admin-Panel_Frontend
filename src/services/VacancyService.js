@@ -7,5 +7,17 @@ const url='http://localhost:8081/';
     getAllVacancy(){
         return axios.get(url+"vacancy")
     }
+
+    getVacancyById(id){
+        return axios.get(url+"vacancy/"+id)
+    }
+
+    deleteVacancyById(id){
+        return axios.delete(url+"vacancy/"+id);
+    }
+
+    updateVacancy(id,data){
+        return axios.put(url+"vacancy/"+id,data);
+    }
 }
 export default new VacancyService
