@@ -77,9 +77,10 @@ export default function VacancyComponent() {
                     </div>
                
                 </div>
-                <div className='row'>
-                <div className='col'>
-            <div className='vacancy-table'>
+                <div className='row' style={{textAlign:'center'}}>
+                <div className='col' style={{textAlign:'center'}}>
+          <div className='vacancy-table' >
+          <div className='table-container'>
       <Table  style={{ backgroundColor: 'rgb(3, 122, 126)',color:'#ffff' }}>
         <thead  style={{ backgroundColor: 'rgb(103, 4, 122)',color:'#ffff' }}>
           <tr>
@@ -92,7 +93,7 @@ export default function VacancyComponent() {
         </thead>
         <tbody>{displayJobs}</tbody>
       </Table>
-      
+      </div>
       </div>
       </div>
       </div>

@@ -1,4 +1,4 @@
-.vacancy {
+.employer {
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -6,8 +6,6 @@
     height: 100vh;
     background: linear-gradient(to right, rgb(47, 102, 86), rgb(2, 69, 145));
   }
-
-  
   
   .title {
     margin-bottom: 20px;
@@ -15,7 +13,7 @@
     color: aliceblue;
   }
   
-  .vacancy-table {
+  .employer-table {
     width: 100%;
     margin: 0 auto; /* Center horizontally */
   }
@@ -26,7 +24,9 @@
   }
 
   .card{
-    width: 60%;
+    width: 65%;
+    margin-top: 50px;
+    margin-bottom: 100px;
   }
 
 
