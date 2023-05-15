@@ -8,7 +8,7 @@ import EditIcon from '@mui/icons-material/Edit';
 import FeedbackIcon from '@mui/icons-material/Feedback';
 import VacancyService from '../services/VacancyService';
 import '../styles/VacancyDataComponent.css';
-import DeleteVacancyPopup from './DeleteVacancyPopup';
+import DeleteVacancyPopup from './DeletePopup';
 import SuccessComponent from './SuccessComponent';
 
 export default function VacancyDataComponent() {
@@ -87,7 +87,7 @@ const handleDeleteVacancy=(id)=>{
 }
 
 // Confirm delete
-const confirmDeleteVacancy = () => {
+const confirmDelete = () => {
   // Perform the delete action
   // You can use the `vacancyId` variable here to perform the delete action
   console.log('Deleting vacancy with ID: ' + vacancyId);
@@ -106,7 +106,7 @@ const confirmDeleteVacancy = () => {
 //close success popup
 const closeSuccessPopup=()=>{
   setSuccessPopupOpen(false);
-  navigate('/vacancy/'+id);
+  navigate('/vacancy');
 }
     
         return (
@@ -187,8 +187,9 @@ const closeSuccessPopup=()=>{
       {/* Delete Vacancy Popup */}
       {isDeletePopupOpen && (
         <DeleteVacancyPopup
-          confirmDeleteVacancy={confirmDeleteVacancy}
+          confirmDelete={confirmDelete}
           closePopup={() => setDeletePopupOpen(false)}
+         message="Are you sure, Do you want to delete this vacancy?"
         />
       )}
 

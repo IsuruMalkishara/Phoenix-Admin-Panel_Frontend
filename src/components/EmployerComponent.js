@@ -3,7 +3,6 @@ import { useNavigate} from 'react-router-dom';
 import Table from "react-bootstrap/Table";
 import ReactPaginate from "react-paginate";
 import Card from 'react-bootstrap/Card';
-import VisibilityIcon from '@mui/icons-material/Visibility';
 import VerifiedUserIcon from '@mui/icons-material/VerifiedUser';
 import ReportIcon from '@mui/icons-material/Report';
 import DeleteIcon from '@mui/icons-material/Delete';
@@ -12,6 +11,8 @@ import FeedbackIcon from '@mui/icons-material/Feedback';
 import IconButton from '@mui/material/IconButton';
 import '../styles/EmployerComponent.css';
 import EmployerService from '../services/EmployerService';
+import DeleteVacancyPopup from './DeletePopup';
+import SuccessComponent from './SuccessComponent';
 
 
 export default function VacancyComponent() {
@@ -19,6 +20,10 @@ export default function VacancyComponent() {
     const [employers, setEmployers]=useState([]);
 
     const [pageNumber, setPageNumber] = useState(0);
+
+    const [isDeletePopupOpen, setDeletePopupOpen] = useState(false);
+     const [empId, setEmpId] = useState('');
+     const [isSuccessPopupOpen,setSuccessPopupOpen]=useState(false);
 
     const navigate = useNavigate();
 
@@ -50,6 +55,37 @@ export default function VacancyComponent() {
       navigate('/employer/'+employerId+'/vacancy');
     };
 
+    //delete
+const handleDeleteEmployer=(id)=>{
+    setEmpId(id);
+    console.warn("open delete popup");
+    setDeletePopupOpen(true);
+  }
+  
+  // Confirm delete
+  const confirmDelete = () => {
+    // Perform the delete action
+    // You can use the `empId` variable here to perform the delete action
+    console.log('Deleting employer with ID: ' + empId);
+    // Close the popup
+    setDeletePopupOpen(false);
+    EmployerService.deleteEmployer(empId).then(res=>{
+      console.log(res.data);
+      if(res.data==true){
+        setSuccessPopupOpen(true);
+       
+      }
+    })
+    
+  };
+  
+  //close success popup
+  const closeSuccessPopup=()=>{
+    setSuccessPopupOpen(false);
+    navigate('/employer');
+  }
+   
+
     //display vacancy in table
     const displayEmployers = employers
     .slice(pagesVisited, pagesVisited + employerPerPage)
@@ -78,7 +114,7 @@ export default function VacancyComponent() {
         </IconButton>
         </td>
         <td>
-        <IconButton >
+        <IconButton onClick={() => handleDeleteEmployer(employer.id)}>
             <DeleteIcon />
         </IconButton>
         </td>
@@ -145,6 +181,22 @@ export default function VacancyComponent() {
       </Card.Body>
     </Card>
       </div>
+      {/* Delete Vacancy Popup */}
+      {isDeletePopupOpen && (
+        <DeleteVacancyPopup
+          confirmDelete={confirmDelete}
+          closePopup={() => setDeletePopupOpen(false)}
+         message="Are you sure, Do you want to delete this Employer?"
+        />
+      )}
+
+      {/* success  Popup */}
+      {isSuccessPopupOpen && (
+        <SuccessComponent
+          message="Successfully Delete Employer"
+          closeSuccessPopup={closeSuccessPopup}
+        />
+      )}
     </>
         );
     
