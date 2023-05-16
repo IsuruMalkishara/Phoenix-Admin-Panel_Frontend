@@ -5,6 +5,7 @@ import ReactPaginate from "react-paginate";
 import Card from 'react-bootstrap/Card';
 import VisibilityIcon from '@mui/icons-material/Visibility';
 import IconButton from '@mui/material/IconButton';
+import AddBoxIcon from '@mui/icons-material/AddBox';
 import VacancyService from '../services/VacancyService';
 import '../styles/EmployerVacancyComponent.css'
 
@@ -47,6 +48,12 @@ export default function EmployerVacancyComponent() {
       navigate('/vacancy/'+vacancyId);
     };
 
+    //navigate to add vacancy page
+    const handleAddVacancy = () => {
+      console.warn("company id: "+id);
+      navigate('/employer/'+id+'/vacancy/add');
+    };
+
     //display vacancy in table
     const displayJobs = vacancies
     .slice(pagesVisited, pagesVisited + jobsPerPage)
@@ -78,6 +85,13 @@ export default function EmployerVacancyComponent() {
                     <div className='title'><h3>Vacancies</h3></div>
                     </div>
                
+                </div>
+                <div className='row'>
+                  <div className='col' style={{ textAlign:'right' }}>
+                  <IconButton onClick={() => handleAddVacancy()}>
+                    <AddBoxIcon />
+                  </IconButton>
+                  </div>
                 </div>
                 <div className='row' style={{textAlign:'center'}}>
                 <div className='col' style={{textAlign:'center'}}>
