@@ -1,0 +1,69 @@
+.vacancy {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    background: linear-gradient(to right, rgb(47, 102, 86), rgb(2, 69, 145));
+  }
+
+  
+  
+  .title {
+    margin-bottom: 20px;
+    text-align: center;
+    color: aliceblue;
+  }
+  
+  .vacancy-table {
+    width: 100%;
+    margin: 0 auto; /* Center horizontally */
+  }
+  
+  .table-container {
+    display: flex;
+    justify-content: center;
+  }
+
+  .card{
+    width: 60%;
+  }
+
+
+  .pagination {
+    display: flex;
+    justify-content: center;
+    margin-top: 20px;
+  }
+  
+  .pagination__link {
+    display: inline-block;
+    padding: 8px 12px;
+    margin: 0 4px;
+    border-radius: 4px;
+    background-color: #e5e5e5;
+    color: #333;
+    cursor: pointer;
+  }
+  
+  .pagination__link--disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+  }
+  
+  .pagination__link--active {
+    background-color: #333;
+    color: #fff;
+  }
+  
+  .pagination__previous {
+    margin-right: 5px;
+  }
+  
+  .pagination__next {
+    margin-left: 5px;
+  }
+
+  .pagination__item {
+    margin: 0 2px;
+  }

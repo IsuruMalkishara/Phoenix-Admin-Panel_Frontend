@@ -8,7 +8,7 @@ import EditIcon from '@mui/icons-material/Edit';
 import FeedbackIcon from '@mui/icons-material/Feedback';
 import VacancyService from '../services/VacancyService';
 import '../styles/VacancyDataComponent.css';
-import DeleteVacancyPopup from './DeleteVacancyPopup';
+import DeletePopup from './DeletePopup';
 import SuccessComponent from './SuccessComponent';
 
 export default function VacancyDataComponent() {
@@ -186,7 +186,7 @@ const closeSuccessPopup=()=>{
       </div>
       {/* Delete Vacancy Popup */}
       {isDeletePopupOpen && (
-        <DeleteVacancyPopup
+        <DeletePopup
           confirmDeleteVacancy={confirmDeleteVacancy}
           closePopup={() => setDeletePopupOpen(false)}
         />
