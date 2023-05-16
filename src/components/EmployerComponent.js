@@ -56,6 +56,12 @@ export default function VacancyComponent() {
       navigate('/employer/'+employerId+'/vacancy');
     };
 
+    //navigate to adit employer page
+    const handleEditEmployer = (employerId) => {
+      console.warn("Employer id: "+employerId);
+      navigate('/employer/'+employerId+'/edit');
+    };
+
     //delete
 const handleDeleteEmployer=(id)=>{
     setEmpId(id);
@@ -110,7 +116,7 @@ const handleDeleteEmployer=(id)=>{
         </IconButton>
         </td>
         <td>
-        <IconButton >
+        <IconButton onClick={() => handleEditEmployer(employer.id)}>
             <EditIcon />
         </IconButton>
         </td>
