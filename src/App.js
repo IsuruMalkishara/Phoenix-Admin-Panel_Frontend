@@ -10,6 +10,7 @@ import EmployerComponent from './components/EmployerComponent';
 import EmployerVacancyComponent from './components/EmployerVacancyComponent';
 import AddVacancyComponent from './components/AddVacancyComponent'
 import EditEmployerComponent from './components/EditEmployerComponent'
+import JobSeekerComponent from './components/JobSeekerComponent';
 
 function App() {
   return (
@@ -34,6 +35,7 @@ function App() {
                   <Route path="/employer/:id/vacancy" element={<> <NavbarComponent/><EmployerVacancyComponent/></>}></Route>
                   <Route path="/employer/:id/vacancy/add" element={<> <NavbarComponent/><AddVacancyComponent/></>}></Route>
                   <Route path="/employer/:id/edit" element={<> <NavbarComponent/><EditEmployerComponent/></>}></Route>
+                  <Route path="/jobseeker" element={<> <NavbarComponent/><JobSeekerComponent/></>}></Route>
 
               </Routes>
               </div>

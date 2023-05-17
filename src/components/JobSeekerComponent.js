@@ -3,45 +3,41 @@ import { useNavigate} from 'react-router-dom';
 import Table from "react-bootstrap/Table";
 import ReactPaginate from "react-paginate";
 import Card from 'react-bootstrap/Card';
-import VerifiedUserIcon from '@mui/icons-material/VerifiedUser';
-import ReportIcon from '@mui/icons-material/Report';
 import DeleteIcon from '@mui/icons-material/Delete';
-import EditIcon from '@mui/icons-material/Edit';
-import FeedbackIcon from '@mui/icons-material/Feedback';
+import VisibilityIcon from '@mui/icons-material/Visibility';
 import IconButton from '@mui/material/IconButton';
-import AddBoxIcon from '@mui/icons-material/AddBox';
 import '../styles/EmployerComponent.css';
-import EmployerService from '../services/EmployerService';
+import JobSeekerService from '../services/JobSeekerService';
 import DeleteVacancyPopup from './DeletePopup';
 import SuccessComponent from './SuccessComponent';
 
 
-export default function EmployerComponent() {
+export default function JobSeekerComponent() {
 
-    const [employers, setEmployers]=useState([]);
+    const [jobseekers, setJobseekers]=useState([]);
 
     const [pageNumber, setPageNumber] = useState(0);
 
     const [isDeletePopupOpen, setDeletePopupOpen] = useState(false);
-     const [empId, setEmpId] = useState('');
+     const [jsId, setJsId] = useState('');
      const [isSuccessPopupOpen,setSuccessPopupOpen]=useState(false);
 
     const navigate = useNavigate();
 
-    const employerPerPage = 6;
-    const pagesVisited = pageNumber * employerPerPage;
-    const pageCount = Math.ceil(employers.length / employerPerPage);
+    const jobseekerPerPage = 6;
+    const pagesVisited = pageNumber * jobseekerPerPage;
+    const pageCount = Math.ceil(jobseekers.length / jobseekerPerPage);
 
     useEffect(() => {
 
-        getAllEmployer() }, []);
+        getAllJobSeekers() }, []);
     
-    //get employers data
-    const getAllEmployer=()=>{
+    //get jobseeker's data
+    const getAllJobSeekers=()=>{
     
-      EmployerService.getAllEmployers().then(res=>{
+      JobSeekerService.getAllJobSeeker().then(res=>{
         console.warn(res.data);
-          setEmployers(res.data);
+          setJobseekers(res.data);
     
       }).catch(error =>{
         console.log(error);
@@ -50,21 +46,16 @@ export default function EmployerComponent() {
     
     }
 
-    //navigate to view vacancy page
-    const handleViewVacancy = (employerId) => {
-      console.warn("Employer id: "+employerId);
-      navigate('/employer/'+employerId+'/vacancy');
+    //navigate to view jobseeker page
+    const handleViewJobSeeker = (jobseekerId) => {
+      console.warn("jobseeker id: "+jobseekerId);
+      navigate('/jobseeker/'+jobseekerId);
     };
 
-    //navigate to adit employer page
-    const handleEditEmployer = (employerId) => {
-      console.warn("Employer id: "+employerId);
-      navigate('/employer/'+employerId+'/edit');
-    };
 
     //delete
-const handleDeleteEmployer=(id)=>{
-    setEmpId(id);
+const handleDeleteJobseeker=(id)=>{
+    setJsId(id);
     console.warn("open delete popup");
     setDeletePopupOpen(true);
   }
@@ -72,11 +63,11 @@ const handleDeleteEmployer=(id)=>{
   // Confirm delete
   const confirmDelete = () => {
     // Perform the delete action
-    // You can use the `empId` variable here to perform the delete action
-    console.log('Deleting employer with ID: ' + empId);
+    // You can use the `jsId` variable here to perform the delete action
+    console.log('Deleting jobseeker with ID: ' + jsId);
     // Close the popup
     setDeletePopupOpen(false);
-    EmployerService.deleteEmployer(empId).then(res=>{
+    JobSeekerService.deleteJobSeeker(jsId).then(res=>{
       console.log(res.data);
       if(res.data==true){
         setSuccessPopupOpen(true);
@@ -89,39 +80,27 @@ const handleDeleteEmployer=(id)=>{
   //close success popup
   const closeSuccessPopup=()=>{
     setSuccessPopupOpen(false);
-    navigate('/employer');
+    navigate('/jobseeker');
   }
    
 
-    //display vacancy in table
-    const displayEmployers = employers
-    .slice(pagesVisited, pagesVisited + employerPerPage)
-    .map((employer,index) => (
-      <tr key={employer.id}>
+    //display jobseeker in table
+    const displayJobseekers = jobseekers
+    .slice(pagesVisited, pagesVisited + jobseekerPerPage)
+    .map((jobseeker,index) => (
+      <tr key={jobseeker.id}>
         <td >{index + 1}</td>
-        <td><img
-              src={employer.logo}
-              alt='Profile picture'
-              height={'50px'}
-              width={'50px'}
-              className='rounded-circle profile-picture'
-            /></td>
-        <td>{employer.name}</td>
-        <td >{employer.address}</td>
-        <td>{employer.email}</td>
-        <td>{employer.verification ? <VerifiedUserIcon /> : <ReportIcon />}</td>
+        <td>{jobseeker.firstName}</td>
+        <td >{jobseeker.lastName}</td>
+        <td>{jobseeker.email}</td>
         <td>
-        <IconButton onClick={() => handleViewVacancy(employer.id)}>
-            <FeedbackIcon />
+        <IconButton onClick={() => handleViewJobSeeker(jobseeker.id)}>
+            <VisibilityIcon />
         </IconButton>
         </td>
+       
         <td>
-        <IconButton onClick={() => handleEditEmployer(employer.id)}>
-            <EditIcon />
-        </IconButton>
-        </td>
-        <td>
-        <IconButton onClick={() => handleDeleteEmployer(employer.id)}>
+        <IconButton onClick={() => handleDeleteJobseeker(jobseeker.id)}>
             <DeleteIcon />
         </IconButton>
         </td>
@@ -134,34 +113,31 @@ const handleDeleteEmployer=(id)=>{
     
         return (
             <>
-            <div className='employer'>
+            <div className='jobseeker'>
             <Card className='card' style={{ backgroundColor: 'rgba(255, 255, 255, 0.301)' }}>
         <Card.Body>
                 <div className='row'>
                     <div className='col'>
-                    <div className='title'><h3>Employers</h3></div>
+                    <div className='title'><h3>JobSeekers</h3></div>
                     </div>
                
                 </div>
                 <div className='row'>
                 <div className='col'>
-            <div className='employer-table'>
+            <div className='jobseeker-table'>
             <div className='table-container'>
       <Table  style={{ backgroundColor: 'rgb(3, 122, 126)',color:'#ffff' }}>
         <thead  style={{ backgroundColor: 'rgb(103, 4, 122)',color:'#ffff' }}>
           <tr>
           <th>Number</th>
-            <th>Logo</th>
-            <th>Name</th>
-            <th>Address of Requests</th>
+            <th>First Name</th>
+            <th>Last Name</th>
             <th>Email Address</th>
-            <th>Verification</th>
-            <th></th>
             <th></th>
             <th></th>
           </tr>
         </thead>
-        <tbody>{displayEmployers}</tbody>
+        <tbody>{displayJobseekers}</tbody>
       </Table>
       </div>
       </div>
@@ -193,14 +169,14 @@ const handleDeleteEmployer=(id)=>{
         <DeleteVacancyPopup
           confirmDelete={confirmDelete}
           closePopup={() => setDeletePopupOpen(false)}
-         message="Are you sure, Do you want to delete this Employer?"
+         message="Are you sure, Do you want to delete this Jobseeker?"
         />
       )}
 
       {/* success  Popup */}
       {isSuccessPopupOpen && (
         <SuccessComponent
-          message="Successfully Delete Employer"
+          message="Successfully Delete Job Seeker"
           closeSuccessPopup={closeSuccessPopup}
         />
       )}
