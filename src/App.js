@@ -11,6 +11,7 @@ import EmployerVacancyComponent from './components/EmployerVacancyComponent';
 import AddVacancyComponent from './components/AddVacancyComponent'
 import EditEmployerComponent from './components/EditEmployerComponent'
 import JobSeekerComponent from './components/JobSeekerComponent';
+import ViewJobSeekerComponent from './components/ViewJobSeekerComponent';
 
 function App() {
   return (
@@ -36,6 +37,7 @@ function App() {
                   <Route path="/employer/:id/vacancy/add" element={<> <NavbarComponent/><AddVacancyComponent/></>}></Route>
                   <Route path="/employer/:id/edit" element={<> <NavbarComponent/><EditEmployerComponent/></>}></Route>
                   <Route path="/jobseeker" element={<> <NavbarComponent/><JobSeekerComponent/></>}></Route>
+                  <Route path="/jobseeker/:id" element={<> <NavbarComponent/><ViewJobSeekerComponent/></>}></Route>
 
               </Routes>
               </div>
