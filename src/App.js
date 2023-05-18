@@ -13,6 +13,7 @@ import EditEmployerComponent from './components/EditEmployerComponent'
 import JobSeekerComponent from './components/JobSeekerComponent';
 import ViewJobSeekerComponent from './components/ViewJobSeekerComponent';
 import CategoryComponent from './components/CategoryComponent';
+import TypeComponent from './components/TypeComponent';
 
 function App() {
   return (
@@ -40,6 +41,7 @@ function App() {
                   <Route path="/jobseeker" element={<> <NavbarComponent/><JobSeekerComponent/></>}></Route>
                   <Route path="/jobseeker/:id" element={<> <NavbarComponent/><ViewJobSeekerComponent/></>}></Route>
                   <Route path="/category" element={<> <NavbarComponent/><CategoryComponent/></>}></Route>
+                  <Route path="/type" element={<> <NavbarComponent/><TypeComponent/></>}></Route>
 
               </Routes>
               </div>

@@ -6,24 +6,24 @@ import DeleteIcon from '@mui/icons-material/Delete';
 import EditIcon from '@mui/icons-material/Edit';
 import IconButton from '@mui/material/IconButton';
 import AddBoxIcon from '@mui/icons-material/AddBox';
-import CategoryService from '../services/CategoryService';
+import TypeService from '../services/TypeService';
 import DeletePopup from './DeletePopup';
 import SuccessComponent from './SuccessComponent';
 import AddPopup from './AddPopup';
 import UpdatePopup from './UpdatePopup';
 
 
-export default function CategoryComponent() {
+export default function TypeComponent() {
 
-    const [categories, setCategories]=useState([]);
+    const [types, setTypes]=useState([]);
 
 
     const [isDeletePopupOpen, setDeletePopupOpen] = useState(false);
-     const [categoryId, setCategoryId] = useState('');
+     const [typeId, setTypeId] = useState('');
      const [isSuccessPopupOpen,setSuccessPopupOpen]=useState(false);
      const [isAddPopupOpen, setAddPopupOpen] = useState(false);
      const [isUpdatePopupOpen,setUpdatePopupOpen]=useState(false);
-     const [categoryToUpdate, setCategoryToUpdate] = useState(null);
+     const [typeToUpdate, setTypeToUpdate] = useState(null);
 
     const navigate = useNavigate();
 
@@ -31,14 +31,14 @@ export default function CategoryComponent() {
 
     useEffect(() => {
 
-        getAllCategory() }, []);
+        getAllTypes() }, []);
     
-    //get categories
-    const getAllCategory=()=>{
+    //get Types
+    const getAllTypes=()=>{
     
-      CategoryService.getAllCategory().then(res=>{
+      TypeService.getAllType().then(res=>{
         console.warn(res.data);
-          setCategories(res.data);
+          setTypes(res.data);
     
       }).catch(error =>{
         console.log(error);
@@ -48,7 +48,7 @@ export default function CategoryComponent() {
     }
 
     //add popup open
-    const handleAddCategory=()=>{
+    const handleAddType=()=>{
         console.warn("add popup open");
      setAddPopupOpen(true);
     }
@@ -65,7 +65,7 @@ export default function CategoryComponent() {
    }
 
    console.warn(data);
-   CategoryService.addCategories(data).then(res=>{
+   TypeService.addType(data).then(res=>{
     console.log(res.data);
     if(res.data==true){
         setAddPopupOpen(false);
@@ -76,17 +76,17 @@ export default function CategoryComponent() {
   })
     }
 
-    //edit category
-    const handleEditCategory = (category) => {
-      console.warn("category id: "+category.id);
-      setCategoryToUpdate(category);
+    //edit type
+    const handleEditType = (type) => {
+      console.warn("type id: "+type.id);
+      setTypeToUpdate(type);
       setUpdatePopupOpen(true);
     };
 
 
-    // Update category
-  const updateCategory = (id, title) => {
-    console.log('Updating category with ID: ' + id);
+    // Update type
+  const updateType = (id, title) => {
+    console.log('Updating type with ID: ' + id);
     const data={
         "id":id,
         "title":title
@@ -94,7 +94,7 @@ export default function CategoryComponent() {
     
        console.warn(data);
     // Perform the update action using the id and title
-    CategoryService.updateCategories(id,data).then(res=>{
+    TypeService.updateType(id,data).then(res=>{
         console.log(res.data);
         if(res.data==true){
             setUpdatePopupOpen(false);
@@ -105,7 +105,7 @@ export default function CategoryComponent() {
       })
     // Close the popup
     setUpdatePopupOpen(false);
-    // Update the category in the state or make an API call to update the category
+   
   };
 
   // ...
@@ -116,8 +116,8 @@ export default function CategoryComponent() {
   };
 
     //delete
-const handleDeleteCategory=(id)=>{
-    setCategoryId(id);
+const handleDeleteType=(id)=>{
+    setTypeId(id);
     console.warn("open delete popup");
     setDeletePopupOpen(true);
   }
@@ -125,11 +125,11 @@ const handleDeleteCategory=(id)=>{
   // Confirm delete
   const confirmDelete = () => {
     // Perform the delete action
-    // You can use the `empId` variable here to perform the delete action
-    console.log('Deleting category with ID: ' + categoryId);
+  
+    console.log('Deleting type with ID: ' + typeId);
     // Close the popup
     setDeletePopupOpen(false);
-    CategoryService.deleteCategories(categoryId).then(res=>{
+    TypeService.deleteType(typeId).then(res=>{
       console.log(res.data);
       if(res.data==true){
         setSuccessPopupOpen(true);
@@ -142,27 +142,27 @@ const handleDeleteCategory=(id)=>{
   //close success popup
   const closeSuccessPopup=()=>{
     setSuccessPopupOpen(false);
-    navigate('/category');
+    navigate('/type');
   }
    
 
-    //display vacancy in table
-    const displayCategory = categories
+    //display types in table
+    const displayTypes = types
     .slice()
-    .map((category,index) => (
-      <tr key={category.id}>
+    .map((type,index) => (
+      <tr key={type.id}>
         <td >{index + 1}</td>
         
-        <td>{category.id}</td>
-        <td >{category.title}</td>
+        <td>{type.id}</td>
+        <td >{type.title}</td>
         
         <td>
-        <IconButton onClick={() => handleEditCategory(category)}>
+        <IconButton onClick={() => handleEditType(type)}>
             <EditIcon />
         </IconButton>
         </td>
         <td>
-        <IconButton onClick={() => handleDeleteCategory(category.id)}>
+        <IconButton onClick={() => handleDeleteType(type.id)}>
             <DeleteIcon />
         </IconButton>
         </td>
@@ -173,25 +173,25 @@ const handleDeleteCategory=(id)=>{
     
         return (
             <>
-            <div className='category'>
+            <div className='type'>
             <Card className='card' style={{ backgroundColor: 'rgba(255, 255, 255, 0.301)' }}>
         <Card.Body>
                 <div className='row'>
                     <div className='col'>
-                    <div className='title'><h3>Categories</h3></div>
+                    <div className='title'><h3>Types</h3></div>
                     </div>
                
                 </div>
                 <div className='row'>
                     <div className='col' style={{ textAlign:'right' }}>
-                    <IconButton onClick={() => handleAddCategory()}>
+                    <IconButton onClick={() => handleAddType()}>
                       <AddBoxIcon />
                     </IconButton>
                     </div>
                 </div>
                 <div className='row'>
                 <div className='col'>
-            <div className='category-table'>
+            <div className='type-table'>
             <div className='table-container'>
       <Table  style={{ backgroundColor: 'rgb(3, 122, 126)',color:'#ffff' }}>
         <thead  style={{ backgroundColor: 'rgb(103, 4, 122)',color:'#ffff' }}>
@@ -204,7 +204,7 @@ const handleDeleteCategory=(id)=>{
             
           </tr>
         </thead>
-        <tbody>{displayCategory}</tbody>
+        <tbody>{displayTypes}</tbody>
       </Table>
       </div>
       </div>
@@ -214,12 +214,12 @@ const handleDeleteCategory=(id)=>{
       </Card.Body>
     </Card>
       </div>
-      {/* Delete Vacancy Popup */}
+      {/* Delete type Popup */}
       {isDeletePopupOpen && (
         <DeletePopup
           confirmDelete={confirmDelete}
           closePopup={() => setDeletePopupOpen(false)}
-         message="Are you sure, Do you want to delete this Category?"
+         message="Are you sure, Do you want to delete this Type?"
         />
       )}
 
@@ -236,17 +236,17 @@ const handleDeleteCategory=(id)=>{
         <AddPopup
           add={add}
           closePopup={closeAddPopup}
-          name="Category"
+          name="Type"
         />
       )}
 
       {/* Update Popup */}
-      {isUpdatePopupOpen && categoryToUpdate && (
+      {isUpdatePopupOpen && typeToUpdate && (
         <UpdatePopup
-          data={categoryToUpdate}
-          update={updateCategory}
+          data={typeToUpdate}
+          update={updateType}
           closePopup={closeUpdatePopup}
-          name="Category"
+          name="Type"
         />
       )}
     </>
