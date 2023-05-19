@@ -10,6 +10,7 @@ import SuccessComponent from './SuccessComponent';
 import ModalityService from '../services/ModalityService';
 import TypeService from '../services/TypeService';
 import CategoryService from '../services/CategoryService';
+import '../styles/AddVacancyComponent.css';
 
 export default function AddVacancyComponent() {
     
@@ -22,12 +23,12 @@ export default function AddVacancyComponent() {
     const [expirationDate, setExpirationDate]=useState(new Date());
     const [description, setDescription]=useState('');
     const [descriptionImg, setDescriptionImg]=useState('');
-    const [salaryRange,setSalaryRange]=useState('');
     const [isSuccessPopupOpen,setSuccessPopupOpen]=useState(false);
     const [typeList, setTypeList] = useState([]);
     const [modalityList, setModalityList] = useState([]);
     const [categoryList, setCategoryList] = useState([]);
-
+    const [salaryLawLimit, setSalaryLawLimit]=useState('');
+    const [salaryUpperLimit, setSalaryUpperLimit]=useState('');
     
     
     const { id } = useParams();
@@ -82,14 +83,21 @@ const handleDescriptionImageChange = (files) => {
 
 //update
 const handleAddVacancy = (event) => {
+  
     event.preventDefault(); 
+
+    let range = '';
+    range=salaryLawLimit + " - " + salaryUpperLimit;
+    console.warn("law limit: "+salaryLawLimit);
+    console.warn("upper limit: "+salaryUpperLimit);
+    console.warn("salary: "+range);
   const data={
     
     "employer":id,
    "title":title,
    "description":description,
    "descriptionImg":descriptionImg,
-   "salaryRange":salaryRange,
+   "salaryRange":range,
    "category":categoryId,
    "modality":modalityId,
    "type":typeId,
@@ -118,16 +126,20 @@ const closeSuccessPopup=()=>{
     
         return (
             <>
-            <div className='vacancy'>
+            <div className='vacancyData'>
               
             <Card className='card' style={{ backgroundColor: 'rgba(255, 255, 255, 0.301)' }}>
         <Card.Body>
         <Form onSubmit={handleAddVacancy}>
           
-        
+        <div className='row'>
+          <div className='col' style={{ textAlign:'center' }}>
+            <h3 className='label'>Add Vacancy</h3>
+          </div>
+        </div>
         <div className='row' style={{ marginTop:'10px' }}>
-        <div className='col'><Form.Label className='label'>Title</Form.Label></div>
-            <div className='col'><Form.Control
+        <div className='col-4'><Form.Label className='label'>Title</Form.Label></div>
+            <div className='col-8'><Form.Control
             className='input'
             type="text"
             value={title}
@@ -136,10 +148,10 @@ const closeSuccessPopup=()=>{
         </div>
             
         <div className='row' style={{ marginTop:'10px' }}>
-  <div className='col'>
+  <div className='col-4'>
     <Form.Label className='label'>Category</Form.Label>
   </div>
-  <div className='col'>
+  <div className='col-8'>
     <Form.Control
       as='select'
       className='input'
@@ -159,10 +171,10 @@ const closeSuccessPopup=()=>{
       </div>
     
       <div className='row' style={{ marginTop:'10px' }}>
-  <div className='col'>
+  <div className='col-4'>
     <Form.Label className='label'>Type</Form.Label>
   </div>
-  <div className='col'>
+  <div className='col-8'>
     <Form.Control
       as='select'
       className='input'
@@ -182,10 +194,10 @@ const closeSuccessPopup=()=>{
       </div>
     
       <div className='row' style={{ marginTop:'10px' }}>
-  <div className='col'>
+  <div className='col-4'>
     <Form.Label className='label'>Modality</Form.Label>
   </div>
-  <div className='col'>
+  <div className='col-8'>
     <Form.Control
       as='select'
       className='input'
@@ -204,30 +216,61 @@ const closeSuccessPopup=()=>{
   </div>
       </div>
       <div className='row' style={{ marginTop:'10px' }}>
-        <div className='col'><Form.Label className='label'>Salary Range</Form.Label></div>
-            <div className='col'><Form.Control
-            className='input'
-            type="text"
-            value={salaryRange}
-            onChange={(event) => setSalaryRange(event.target.value)}
-          /></div>
+        <div className='col-4'><Form.Label className='label'>Salary Range</Form.Label></div>
+            <div className='col-4'>
+            <Form.Control
+         as='select'
+         className='input'
+        value={salaryLawLimit}
+         onChange={(event) => setSalaryLawLimit(event.target.value)}
+    >
+      <option >
+          Law Salary Limit
+        </option>
+      <option value={'0'}>0</option>
+      <option value={'5000'}>5000</option>
+      <option value={'15000'}>15000</option>
+      <option value={'20000'}>20000</option>
+      <option value={'50000'}>50000</option>
+      <option value={'80000'}>80000</option>
+      <option value={'150000'}>150000</option>
+    </Form.Control></div>
+    <div className='col-4'>
+            <Form.Control
+         as='select'
+         className='input'
+        value={salaryUpperLimit}
+         onChange={(event) => setSalaryUpperLimit(event.target.value)}
+    >
+      <option >
+          Upper Salary Limit
+        </option>
+      
+      <option value={'5000'}>5000</option>
+      <option value={'15000'}>15000</option>
+      <option value={'20000'}>20000</option>
+      <option value={'50000'}>50000</option>
+      <option value={'80000'}>80000</option>
+      <option value={'150000'}>150000</option>
+      <option value={'More'}>More</option>
+    </Form.Control></div>
         </div>
   
         <div className="row" style={{ marginTop: '10px' }}>
-            <div className="col">
+            <div className="col-4">
               <Form.Label className="label">Description</Form.Label>
             </div>
-            <div className="col">
+            <div className="col-8">
               {/* React Quill editor */}
-              <ReactQuill value={description} onChange={setDescription} />
+              <ReactQuill style={{ backgroundColor:'rgba(255, 255, 255, 0.9)' }} value={description} onChange={setDescription} />
             </div>
           </div>
 
           <div className="row" style={{ marginTop: '10px' }}>
-  <div className="col">
+  <div className="col-4">
     <Form.Label className="label">Description Image</Form.Label>
   </div>
-  <div className="col">
+  <div className="col-8">
     <Form.Control
       type="file"
       accept="image/*"
@@ -237,10 +280,10 @@ const closeSuccessPopup=()=>{
 </div>
 
 <div className="row" style={{ marginTop: '10px' }}>
-  <div className="col">
+  <div className="col-4">
     <Form.Label className="label">Expiration Date</Form.Label>
   </div>
-  <div className="col">
+  <div className="col-8">
   <DatePicker
   selected={expirationDate}
   onChange={date => setExpirationDate(date)}

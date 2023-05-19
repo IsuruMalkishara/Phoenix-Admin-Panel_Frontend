@@ -191,16 +191,17 @@ const handleDeleteCategory=(id)=>{
                     </div>
                
                 </div>
+                
                 <div className='row'>
+                <div className='col'>
+            <div className='category-table'>
+            <div className='row'>
                     <div className='col' style={{ textAlign:'right' }}>
                     <IconButton onClick={() => handleAddCategory()}>
                       <AddBoxIcon />
                     </IconButton>
                     </div>
                 </div>
-                <div className='row'>
-                <div className='col'>
-            <div className='category-table'>
             <div className='table-container'>
       <Table  style={{ backgroundColor: 'rgb(3, 122, 126)',color:'#ffff' }}>
         <thead  style={{ backgroundColor: 'rgb(103, 4, 122)',color:'#ffff' }}>

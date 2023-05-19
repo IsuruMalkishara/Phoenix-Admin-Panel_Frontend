@@ -181,16 +181,17 @@ const handleDeleteType=(id)=>{
                     </div>
                
                 </div>
+                
                 <div className='row'>
+                <div className='col'>
+            <div className='type-table'>
+            <div className='row'>
                     <div className='col' style={{ textAlign:'right' }}>
                     <IconButton onClick={() => handleAddType()}>
                       <AddBoxIcon />
                     </IconButton>
                     </div>
                 </div>
-                <div className='row'>
-                <div className='col'>
-            <div className='type-table'>
             <div className='table-container'>
       <Table  style={{ backgroundColor: 'rgb(3, 122, 126)',color:'#ffff' }}>
         <thead  style={{ backgroundColor: 'rgb(103, 4, 122)',color:'#ffff' }}>

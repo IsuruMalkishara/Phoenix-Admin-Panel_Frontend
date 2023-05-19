@@ -32,6 +32,8 @@ export default function EditVacancyComponent() {
     const [modalityList, setModalityList] = useState([]);
     const [categoryList, setCategoryList] = useState([]);
     const [companyId,setCompanyId]=useState('');
+    const [salaryLawLimit, setSalaryLawLimit]=useState('');
+    const [salaryUpperLimit, setSalaryUpperLimit]=useState('');
     
     
     const { id } = useParams();
@@ -62,7 +64,10 @@ export default function EditVacancyComponent() {
           setExpirationDate(new Date(res.data.expirationDate));
           setCompanyId(res.data.employer.id)
 
-    
+          const [salary1, salary2] = salaryRange.split(' - ');
+          setSalaryLawLimit(salary1);
+          setSalaryUpperLimit(salary2);
+      console.warn(salary1);
       }).catch(error =>{
         console.log(error);
     }) 
@@ -111,14 +116,21 @@ const handleDescriptionImageChange = (files) => {
 };
 
 //update
-const handleUpdateVacancy=()=>{
+const handleUpdateVacancy=(event)=>{
+  event.preventDefault(); 
+
+    let range = '';
+    range=salaryLawLimit + " - " + salaryUpperLimit;
+    console.warn("law limit: "+salaryLawLimit);
+    console.warn("upper limit: "+salaryUpperLimit);
+    console.warn("salary: "+range);
   const data={
     "id":id,
     "employer":companyId,
    "title":title,
    "description":description,
    "descriptionImg":descriptionImg,
-   "salaryRange":salaryRange,
+   "salaryRange":range,
    "category":categoryId,
    "modality":modalityId,
    "type":typeId,
@@ -243,12 +255,43 @@ const closeSuccessPopup=()=>{
       </div>
       <div className='row' style={{ marginTop:'10px' }}>
         <div className='col-4'><Form.Label className='label'>Salary Range:</Form.Label></div>
-            <div className='col-8'><Form.Control
-            className='input'
-            type="text"
-            value={salaryRange}
-            onChange={(event) => setSalaryRange(event.target.value)}
-          /></div>
+        <div className='col-4'>
+            <Form.Control
+         as='select'
+         className='input'
+        value={salaryLawLimit}
+         onChange={(event) => setSalaryLawLimit(event.target.value)}
+    >
+     <option value={salaryLawLimit}>
+          {salaryLawLimit}
+        </option>
+      <option value={'0'}>0</option>
+      <option value={'5000'}>5000</option>
+      <option value={'15000'}>15000</option>
+      <option value={'20000'}>20000</option>
+      <option value={'50000'}>50000</option>
+      <option value={'80000'}>80000</option>
+      <option value={'150000'}>150000</option>
+    </Form.Control></div>
+    <div className='col-4'>
+            <Form.Control
+         as='select'
+         className='input'
+        value={salaryUpperLimit}
+         onChange={(event) => setSalaryUpperLimit(event.target.value)}
+    >
+      <option value={salaryUpperLimit}>
+          {salaryUpperLimit}
+        </option>
+      
+      <option value={'5000'}>5000</option>
+      <option value={'15000'}>15000</option>
+      <option value={'20000'}>20000</option>
+      <option value={'50000'}>50000</option>
+      <option value={'80000'}>80000</option>
+      <option value={'150000'}>150000</option>
+      <option value={'More'}>More</option>
+    </Form.Control></div>
         </div>
   
         <div className="row" style={{ marginTop: '10px' }}>
@@ -257,7 +300,7 @@ const closeSuccessPopup=()=>{
             </div>
             <div className="col-8">
               {/* React Quill editor */}
-              <ReactQuill value={description} onChange={setDescription} />
+              <ReactQuill style={{ backgroundColor:'rgba(255, 255, 255, 0.9)' }} value={description} onChange={setDescription} />
             </div>
           </div>
 
