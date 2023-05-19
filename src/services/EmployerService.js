@@ -22,7 +22,7 @@ const url='http://localhost:8081/';
       }
     
       searchEmployer(data){
-        return axios.post(url+"employer/title",data);
+        return axios.post(url+"employer/title",{ title: data });
       }
 }
 export default new EmployerService

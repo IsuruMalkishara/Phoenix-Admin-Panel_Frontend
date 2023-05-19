@@ -8,6 +8,8 @@ import DeleteIcon from '@mui/icons-material/Delete';
 import EditIcon from '@mui/icons-material/Edit';
 import FeedbackIcon from '@mui/icons-material/Feedback';
 import IconButton from '@mui/material/IconButton';
+import SearchIcon from '@mui/icons-material/Search';
+import Form from "react-bootstrap/Form";
 import '../styles/EmployerComponent.css';
 import EmployerService from '../services/EmployerService';
 import DeleteVacancyPopup from './DeletePopup';
@@ -19,6 +21,7 @@ export default function EmployerComponent() {
     const [employers, setEmployers]=useState([]);
 
     const [pageNumber, setPageNumber] = useState(0);
+    const [searchText, setSearchText]=useState('');
 
     const [isDeletePopupOpen, setDeletePopupOpen] = useState(false);
      const [empId, setEmpId] = useState('');
@@ -47,7 +50,18 @@ export default function EmployerComponent() {
     
     
     }
-
+//search employer
+    const searchEmployer=()=>{
+      console.warn(searchText);
+      if(searchText==undefined || searchText.length==0){
+        getAllEmployer();
+      }else{
+        EmployerService.searchEmployer(searchText).then(res=>{
+          console.warn(res.data);
+          setEmployers(res.data);
+        })
+      }
+    }
     //navigate to view vacancy page
     const handleViewVacancy = (employerId) => {
       console.warn("Employer id: "+employerId);
@@ -141,6 +155,24 @@ const handleDeleteEmployer=(id)=>{
                
                 </div>
                 <div className='row'>
+                  <div className='col-1'></div>
+                  <div className='col-9'>
+                  <Form.Control
+                className='input'
+                type="text"
+                value={searchText}
+                onChange={(e) => setSearchText(e.target.value)}
+                placeholder="Enter Employer Name"
+              />
+                  </div>
+                  <div className='col-1'>
+                  <IconButton onClick={searchEmployer}>
+                      <SearchIcon />
+                  </IconButton>
+                  </div>
+                  <div className='col-1'></div>
+                </div>
+                <div className='row' style={{ marginTop:'10px' }}>
                 <div className='col'>
             <div className='employer-table'>
             <div className='table-container'>

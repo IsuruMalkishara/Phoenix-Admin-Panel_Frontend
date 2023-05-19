@@ -1,0 +1,29 @@
+.admin {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    background: linear-gradient(to right, rgb(47, 102, 86), rgb(2, 69, 145));
+    padding-top: 10px;
+    min-height: 90vh;
+  }
+  
+  .card {
+    width: 40rem;
+    margin-top: 10px;
+    margin-bottom: 20px;
+  }
+
+  .update-btn{
+    margin-top: 10px;
+    background-color: rgb(36, 75, 119) !important;
+    border-radius: 20px !important;
+    width: 150px;
+  }
+
+
+  .input{
+    background-color: rgba(255, 255, 255, 0.9) !important;
+    border-radius: 20px !important;
+    width: 100%;
+  }

@@ -17,6 +17,8 @@ import TypeComponent from './components/TypeComponent';
 import ModalityComponent from './components/ModalityComponent';
 import EditProfileComponent from './components/EditProfileComponent';
 import AdminComponent from './components/AdminComponent';
+import AddAdminComponent from './components/AddAdminComponent';
+import EditAdminComponent from './components/EditAdminComponent';
 
 function App() {
   return (
@@ -26,7 +28,7 @@ function App() {
               
               <Routes>
               
-              <Route path="/login" exact element={<LoginComponent/>}></Route>
+              <Route path="/" exact element={<LoginComponent/>}></Route>
 
               </Routes>
 
@@ -48,6 +50,8 @@ function App() {
                   <Route path="/modality" element={<> <NavbarComponent/><ModalityComponent/></>}></Route>
                   <Route path="/edit" element={<> <NavbarComponent/><EditProfileComponent/></>}></Route>
                   <Route path="/admin" element={<> <NavbarComponent/><AdminComponent/></>}></Route>
+                  <Route path="/admin/add" element={<> <NavbarComponent/><AddAdminComponent/></>}></Route>
+                  <Route path="/admin/:id/edit" element={<> <NavbarComponent/><EditAdminComponent/></>}></Route>
               </Routes>
               </div>
       </router>

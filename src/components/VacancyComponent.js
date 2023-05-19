@@ -94,6 +94,7 @@ export default function VacancyComponent() {
                   <div className='col-1'></div>
                   <div className='col-9'>
                   <Form.Control
+                  placeholder="Enter Vacancy Title"
                 className='input'
                 type="text"
                 value={searchText}

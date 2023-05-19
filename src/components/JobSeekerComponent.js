@@ -5,6 +5,8 @@ import ReactPaginate from "react-paginate";
 import DeleteIcon from '@mui/icons-material/Delete';
 import VisibilityIcon from '@mui/icons-material/Visibility';
 import IconButton from '@mui/material/IconButton';
+import SearchIcon from '@mui/icons-material/Search';
+import Form from "react-bootstrap/Form";
 import '../styles/JobSeekerComponent.css';
 import JobSeekerService from '../services/JobSeekerService';
 import DeleteVacancyPopup from './DeletePopup';
@@ -16,6 +18,7 @@ export default function JobSeekerComponent() {
     const [jobseekers, setJobseekers]=useState([]);
 
     const [pageNumber, setPageNumber] = useState(0);
+    const [searchText, setSearchText]=useState('');
 
     const [isDeletePopupOpen, setDeletePopupOpen] = useState(false);
      const [jsId, setJsId] = useState('');
@@ -43,6 +46,19 @@ export default function JobSeekerComponent() {
     }) 
     
     
+    }
+
+    //search jobseeker
+    const searchJobSeeker=()=>{
+      console.warn(searchText);
+      if(searchText==undefined || searchText.length==0){
+        getAllJobSeekers();
+      }else{
+        JobSeekerService.searchJobSeeker(searchText).then(res=>{
+          console.warn(res.data);
+          setJobseekers(res.data);
+        })
+      }
     }
 
     //navigate to view jobseeker page
@@ -121,6 +137,24 @@ const handleDeleteJobseeker=(id)=>{
                
                 </div>
                 <div className='row'>
+                  <div className='col-1'></div>
+                  <div className='col-9'>
+                  <Form.Control
+                className='input'
+                type="text"
+                value={searchText}
+                onChange={(e) => setSearchText(e.target.value)}
+                placeholder="Enter Job Seeker Name"
+              />
+                  </div>
+                  <div className='col-1'>
+                  <IconButton onClick={searchJobSeeker}>
+                      <SearchIcon />
+                  </IconButton>
+                  </div>
+                  <div className='col-1'></div>
+                </div>
+                <div className='row' style={{ marginTop:'10px' }}>
                 <div className='col'>
             <div className='jobseeker-table'>
             <div className='table-container'>

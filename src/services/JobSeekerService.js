@@ -18,7 +18,7 @@ const url='http://localhost:8081/';
     
     
       searchJobSeeker(data){
-        return axios.post(url+"jobseeker/title",data);
+        return axios.post(url+"jobseeker/title",{ title: data });
       }
 }
 export default new JobSeekerService
