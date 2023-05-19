@@ -10,8 +10,9 @@ import SuccessComponent from './SuccessComponent';
 import ModalityService from '../services/ModalityService';
 import TypeService from '../services/TypeService';
 import CategoryService from '../services/CategoryService';
+import '../styles/EditVacancyComponent.css';
 
-export default function VacancyDataComponent() {
+export default function EditVacancyComponent() {
   const navigate = useNavigate();
 
     const [title, setTitle]=useState('');
@@ -146,7 +147,12 @@ const closeSuccessPopup=()=>{
     
         return (
             <>
-            <div className='vacancy'>
+            <div className='vacancyData'>
+              <div className='row'>
+                <div className='col' style={{ textAlign:'center',color:'#ffff' }}>
+                  <h1>Edit Vacancy</h1>
+                </div>
+              </div>
               
             <Card className='card' style={{ backgroundColor: 'rgba(255, 255, 255, 0.301)' }}>
         <Card.Body>
@@ -158,8 +164,8 @@ const closeSuccessPopup=()=>{
           </div>
         
         <div className='row' style={{ marginTop:'10px' }}>
-        <div className='col'><Form.Label className='label'>Title</Form.Label></div>
-            <div className='col'><Form.Control
+        <div className='col-4'><Form.Label className='label'>Title:</Form.Label></div>
+            <div className='col-8'><Form.Control
             className='input'
             type="text"
             value={title}
@@ -168,10 +174,10 @@ const closeSuccessPopup=()=>{
         </div>
             
         <div className='row' style={{ marginTop:'10px' }}>
-  <div className='col'>
-    <Form.Label className='label'>Category</Form.Label>
+  <div className='col-4'>
+    <Form.Label className='label'>Category:</Form.Label>
   </div>
-  <div className='col'>
+  <div className='col-8'>
     <Form.Control
       as='select'
       className='input'
@@ -191,10 +197,10 @@ const closeSuccessPopup=()=>{
       </div>
     
       <div className='row' style={{ marginTop:'10px' }}>
-  <div className='col'>
-    <Form.Label className='label'>Type</Form.Label>
+  <div className='col-4'>
+    <Form.Label className='label'>Type:</Form.Label>
   </div>
-  <div className='col'>
+  <div className='col-8'>
     <Form.Control
       as='select'
       className='input'
@@ -214,10 +220,10 @@ const closeSuccessPopup=()=>{
       </div>
     
       <div className='row' style={{ marginTop:'10px' }}>
-  <div className='col'>
-    <Form.Label className='label'>Modality</Form.Label>
+  <div className='col-4'>
+    <Form.Label className='label'>Modality:</Form.Label>
   </div>
-  <div className='col'>
+  <div className='col-8'>
     <Form.Control
       as='select'
       className='input'
@@ -236,8 +242,8 @@ const closeSuccessPopup=()=>{
   </div>
       </div>
       <div className='row' style={{ marginTop:'10px' }}>
-        <div className='col'><Form.Label className='label'>Salary Range</Form.Label></div>
-            <div className='col'><Form.Control
+        <div className='col-4'><Form.Label className='label'>Salary Range:</Form.Label></div>
+            <div className='col-8'><Form.Control
             className='input'
             type="text"
             value={salaryRange}
@@ -246,21 +252,22 @@ const closeSuccessPopup=()=>{
         </div>
   
         <div className="row" style={{ marginTop: '10px' }}>
-            <div className="col">
-              <Form.Label className="label">Description</Form.Label>
+            <div className="col-4">
+              <Form.Label className="label">Description:</Form.Label>
             </div>
-            <div className="col">
+            <div className="col-8">
               {/* React Quill editor */}
               <ReactQuill value={description} onChange={setDescription} />
             </div>
           </div>
 
           <div className="row" style={{ marginTop: '10px' }}>
-  <div className="col">
-    <Form.Label className="label">Description Image</Form.Label>
+  <div className="col-4">
+    <Form.Label className="label">Description Image:</Form.Label>
   </div>
-  <div className="col">
+  <div className="col-8">
     <Form.Control
+    className='input'
       type="file"
       accept="image/*"
       onChange={(event) => handleDescriptionImageChange(event.target.files)}
@@ -269,11 +276,12 @@ const closeSuccessPopup=()=>{
 </div>
 
 <div className="row" style={{ marginTop: '10px' }}>
-  <div className="col">
-    <Form.Label className="label">Expiration Date</Form.Label>
+  <div className="col-4">
+    <Form.Label className="label">Expiration Date:</Form.Label>
   </div>
-  <div className="col">
+  <div className="col-8">
   <DatePicker
+  className='input'
   selected={expirationDate}
   onChange={date => setExpirationDate(date)}
   showTimeSelect

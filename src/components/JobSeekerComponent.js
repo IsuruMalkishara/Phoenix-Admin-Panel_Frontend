@@ -2,11 +2,10 @@ import React, {useState,useEffect } from 'react';
 import { useNavigate} from 'react-router-dom';
 import Table from "react-bootstrap/Table";
 import ReactPaginate from "react-paginate";
-import Card from 'react-bootstrap/Card';
 import DeleteIcon from '@mui/icons-material/Delete';
 import VisibilityIcon from '@mui/icons-material/Visibility';
 import IconButton from '@mui/material/IconButton';
-import '../styles/EmployerComponent.css';
+import '../styles/JobSeekerComponent.css';
 import JobSeekerService from '../services/JobSeekerService';
 import DeleteVacancyPopup from './DeletePopup';
 import SuccessComponent from './SuccessComponent';
@@ -114,11 +113,10 @@ const handleDeleteJobseeker=(id)=>{
         return (
             <>
             <div className='jobseeker'>
-            <Card className='card' style={{ backgroundColor: 'rgba(255, 255, 255, 0.301)' }}>
-        <Card.Body>
+            
                 <div className='row'>
                     <div className='col'>
-                    <div className='title'><h3>JobSeekers</h3></div>
+                    <div className='title'><h3>JOB SEEKERS</h3></div>
                     </div>
                
                 </div>
@@ -161,8 +159,7 @@ const handleDeleteJobseeker=(id)=>{
     </div>
                
                 </div>
-      </Card.Body>
-    </Card>
+      
       </div>
       {/* Delete Vacancy Popup */}
       {isDeletePopupOpen && (

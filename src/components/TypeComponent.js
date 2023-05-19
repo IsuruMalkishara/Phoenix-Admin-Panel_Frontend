@@ -1,7 +1,6 @@
 import React, {useState,useEffect } from 'react';
 import { useNavigate} from 'react-router-dom';
 import Table from "react-bootstrap/Table";
-import Card from 'react-bootstrap/Card';
 import DeleteIcon from '@mui/icons-material/Delete';
 import EditIcon from '@mui/icons-material/Edit';
 import IconButton from '@mui/material/IconButton';
@@ -11,6 +10,7 @@ import DeletePopup from './DeletePopup';
 import SuccessComponent from './SuccessComponent';
 import AddPopup from './AddPopup';
 import UpdatePopup from './UpdatePopup';
+import '../styles/TypeComponent.css';
 
 
 export default function TypeComponent() {
@@ -174,8 +174,7 @@ const handleDeleteType=(id)=>{
         return (
             <>
             <div className='type'>
-            <Card className='card' style={{ backgroundColor: 'rgba(255, 255, 255, 0.301)' }}>
-        <Card.Body>
+            
                 <div className='row'>
                     <div className='col'>
                     <div className='title'><h3>Types</h3></div>
@@ -211,8 +210,7 @@ const handleDeleteType=(id)=>{
       </div>
       </div>
       
-      </Card.Body>
-    </Card>
+      
       </div>
       {/* Delete type Popup */}
       {isDeletePopupOpen && (

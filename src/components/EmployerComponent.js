@@ -2,14 +2,12 @@ import React, {useState,useEffect } from 'react';
 import { useNavigate} from 'react-router-dom';
 import Table from "react-bootstrap/Table";
 import ReactPaginate from "react-paginate";
-import Card from 'react-bootstrap/Card';
 import VerifiedUserIcon from '@mui/icons-material/VerifiedUser';
 import ReportIcon from '@mui/icons-material/Report';
 import DeleteIcon from '@mui/icons-material/Delete';
 import EditIcon from '@mui/icons-material/Edit';
 import FeedbackIcon from '@mui/icons-material/Feedback';
 import IconButton from '@mui/material/IconButton';
-import AddBoxIcon from '@mui/icons-material/AddBox';
 import '../styles/EmployerComponent.css';
 import EmployerService from '../services/EmployerService';
 import DeleteVacancyPopup from './DeletePopup';
@@ -135,8 +133,7 @@ const handleDeleteEmployer=(id)=>{
         return (
             <>
             <div className='employer'>
-            <Card className='card' style={{ backgroundColor: 'rgba(255, 255, 255, 0.301)' }}>
-        <Card.Body>
+            
                 <div className='row'>
                     <div className='col'>
                     <div className='title'><h3>Employers</h3></div>
@@ -185,8 +182,7 @@ const handleDeleteEmployer=(id)=>{
     </div>
                
                 </div>
-      </Card.Body>
-    </Card>
+      
       </div>
       {/* Delete Vacancy Popup */}
       {isDeletePopupOpen && (

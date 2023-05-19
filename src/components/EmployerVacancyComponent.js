@@ -2,7 +2,6 @@ import React, {useState,useEffect } from 'react';
 import { useNavigate,useParams} from 'react-router-dom';
 import Table from "react-bootstrap/Table";
 import ReactPaginate from "react-paginate";
-import Card from 'react-bootstrap/Card';
 import VisibilityIcon from '@mui/icons-material/Visibility';
 import AddBoxIcon from '@mui/icons-material/AddBox';
 import IconButton from '@mui/material/IconButton';
@@ -77,16 +76,15 @@ export default function EmployerVacancyComponent() {
     
         return (
             <>
-            <div className='vacancy'>
-            <Card className='card' style={{ backgroundColor: 'rgba(255, 255, 255, 0.301)' }}>
-        <Card.Body>
+            <div className='empVacancy'>
+            
                 <div className='row'>
                     <div className='col'>
-                    <div className='title'><h3>Vacancies</h3></div>
+                    <div className='title'><h3>VACANCIES</h3></div>
                     </div>
                
                 </div>
-                <div className='row'>
+                <div className='row'style={{ textAlign:'right' }}>
                   <div className='col' style={{ textAlign:'right' }}>
                   <IconButton onClick={() => handleAddVacancy()}>
                       <AddBoxIcon />
@@ -131,8 +129,7 @@ export default function EmployerVacancyComponent() {
     </div>
                
                 </div>
-      </Card.Body>
-    </Card>
+      
       </div>
     </>
         );

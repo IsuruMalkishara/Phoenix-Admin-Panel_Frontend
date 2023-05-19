@@ -1,10 +1,11 @@
-.vacancy {
+.category {
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
     height: 100vh;
     background: linear-gradient(to right, rgb(47, 102, 86), rgb(2, 69, 145));
+    
   }
 
   
@@ -15,7 +16,7 @@
     color: aliceblue;
   }
   
-  .vacancy-table {
+  .category-table {
     width: 100%;
     margin: 0 auto; /* Center horizontally */
   }
@@ -24,8 +25,6 @@
     display: flex;
     justify-content: center;
   }
-
-  
 
   .pagination {
     display: flex;
@@ -63,4 +62,5 @@
 
   .pagination__item {
     margin: 0 2px;
-  }
+  } 
+  

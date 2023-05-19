@@ -3,6 +3,7 @@ import { useParams,useNavigate } from 'react-router-dom';
 import { Card, Form, Button } from 'react-bootstrap';
 import EmployerService from '../services/EmployerService';
 import SuccessComponent from './SuccessComponent';
+import '../styles/EditEmployerComponent.css';
 
 export default function EditEmployerComponent() {
   const navigate = useNavigate();
@@ -98,7 +99,7 @@ const closeSuccessPopup=()=>{
     
         return (
             <>
-            <div className='employer'>
+            <div className='employerData'>
               
             <Card className='card' style={{ backgroundColor: 'rgba(255, 255, 255, 0.301)' }}>
         <Card.Body>
@@ -110,8 +111,8 @@ const closeSuccessPopup=()=>{
           </div>
         
         <div className='row' style={{ marginTop:'10px' }}>
-        <div className='col'><Form.Label className='label'>Name</Form.Label></div>
-            <div className='col'><Form.Control
+        <div className='col-4'><Form.Label className='label'>Name:</Form.Label></div>
+            <div className='col-8'><Form.Control
             className='input'
             type="text"
             value={name}
@@ -120,8 +121,8 @@ const closeSuccessPopup=()=>{
         </div>
 
         <div className='row' style={{ marginTop:'10px' }}>
-        <div className='col'><Form.Label className='label'>Address</Form.Label></div>
-            <div className='col'><Form.Control
+        <div className='col-4'><Form.Label className='label'>Address:</Form.Label></div>
+            <div className='col-8'><Form.Control
             className='input'
             type="text"
             value={address}
@@ -130,8 +131,8 @@ const closeSuccessPopup=()=>{
         </div>
             
         <div className='row' style={{ marginTop:'10px' }}>
-        <div className='col'><Form.Label className='label'>Email Address</Form.Label></div>
-            <div className='col'><Form.Control
+        <div className='col-4'><Form.Label className='label'>Email Address:</Form.Label></div>
+            <div className='col-8'><Form.Control
             className='input'
             type="text"
             value={email}
@@ -139,8 +140,8 @@ const closeSuccessPopup=()=>{
           /></div>
         </div>
         <div className='row' style={{ marginTop:'10px' }}>
-        <div className='col'><Form.Label className='label'>Phone</Form.Label></div>
-            <div className='col'><Form.Control
+        <div className='col-4'><Form.Label className='label'>Phone:</Form.Label></div>
+            <div className='col-8'><Form.Control
             className='input'
             type="text"
             value={phone}
@@ -148,12 +149,12 @@ const closeSuccessPopup=()=>{
           /></div>
         </div>
       <div className='row' style={{ marginTop:'10px' }}>
-  <div className='col'>
-    <Form.Label className='label'>Verification</Form.Label>
+  <div className='col-4'>
+    <Form.Label className='label'>Verification:</Form.Label>
   </div>
-  <div className='col'>
+  <div className='col-8'>
   <Form.Check
-                    
+                   className='label' 
                     type='checkbox'
                     checked={verification}
                     onChange={(event) => setVerification(event.target.checked)}
@@ -165,11 +166,12 @@ const closeSuccessPopup=()=>{
      
 
           <div className="row" style={{ marginTop: '10px' }}>
-  <div className="col">
+  <div className="col-4">
     <Form.Label className="label">Logo</Form.Label>
   </div>
-  <div className="col">
+  <div className="col-8">
     <Form.Control
+    className='input'
       type="file"
       accept="image/*"
       onChange={(event) => handleLogoChange(event.target.files)}

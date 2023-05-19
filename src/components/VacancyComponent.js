@@ -1,9 +1,10 @@
 import React, {useState,useEffect } from 'react';
 import { useNavigate} from 'react-router-dom';
 import Table from "react-bootstrap/Table";
+import Form from "react-bootstrap/Form";
 import ReactPaginate from "react-paginate";
-import Card from 'react-bootstrap/Card';
 import VisibilityIcon from '@mui/icons-material/Visibility';
+import SearchIcon from '@mui/icons-material/Search';
 import IconButton from '@mui/material/IconButton';
 import VacancyService from '../services/VacancyService';
 import '../styles/VacancyComponent.css'
@@ -12,6 +13,7 @@ import '../styles/VacancyComponent.css'
 export default function VacancyComponent() {
 
     const [vacancies, setVacancies]=useState([]);
+    const [searchText, setSearchText]=useState('');
 
     const [pageNumber, setPageNumber] = useState(0);
 
@@ -65,19 +67,47 @@ export default function VacancyComponent() {
   const changePage = ({ selected }) => {
     setPageNumber(selected);
   };
+
+  const serachVacancy=()=>{
+    console.warn(searchText);
+    if(searchText==undefined || searchText.length==0){
+      getAllVacancy();
+    }else{
+      VacancyService.searchVacancy(searchText).then(res=>{
+        console.warn(res.data);
+        setVacancies(res.data);
+      })
+    }
+  }
     
         return (
             <>
             <div className='vacancy'>
-            <Card className='card' style={{ backgroundColor: 'rgba(255, 255, 255, 0.301)' }}>
-        <Card.Body>
+            
                 <div className='row'>
                     <div className='col'>
-                    <div className='title'><h3>Vacancies</h3></div>
+                    <div className='title'><h3>VACANCIES</h3></div>
                     </div>
                
                 </div>
-                <div className='row' style={{textAlign:'center'}}>
+                <div className='row'>
+                  <div className='col-1'></div>
+                  <div className='col-9'>
+                  <Form.Control
+                className='input'
+                type="text"
+                value={searchText}
+                onChange={(e) => setSearchText(e.target.value)}
+              />
+                  </div>
+                  <div className='col-1'>
+                  <IconButton onClick={serachVacancy}>
+                      <SearchIcon />
+                  </IconButton>
+                  </div>
+                  <div className='col-1'></div>
+                </div>
+                <div className='row' style={{textAlign:'center',marginTop:'10px'}}>
                 <div className='col' style={{textAlign:'center'}}>
           <div className='vacancy-table' >
           <div className='table-container'>
@@ -115,8 +145,7 @@ export default function VacancyComponent() {
     </div>
                
                 </div>
-      </Card.Body>
-    </Card>
+      
       </div>
     </>
         );

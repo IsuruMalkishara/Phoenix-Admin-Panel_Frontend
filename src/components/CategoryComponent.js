@@ -1,16 +1,17 @@
 import React, {useState,useEffect } from 'react';
 import { useNavigate} from 'react-router-dom';
 import Table from "react-bootstrap/Table";
-import Card from 'react-bootstrap/Card';
 import DeleteIcon from '@mui/icons-material/Delete';
 import EditIcon from '@mui/icons-material/Edit';
 import IconButton from '@mui/material/IconButton';
 import AddBoxIcon from '@mui/icons-material/AddBox';
+import ReactPaginate from "react-paginate";
 import CategoryService from '../services/CategoryService';
 import DeletePopup from './DeletePopup';
 import SuccessComponent from './SuccessComponent';
 import AddPopup from './AddPopup';
 import UpdatePopup from './UpdatePopup';
+import '../styles/CategoryComponent.css';
 
 
 export default function CategoryComponent() {
@@ -25,7 +26,13 @@ export default function CategoryComponent() {
      const [isUpdatePopupOpen,setUpdatePopupOpen]=useState(false);
      const [categoryToUpdate, setCategoryToUpdate] = useState(null);
 
-    const navigate = useNavigate();
+     const [pageNumber, setPageNumber] = useState(0);
+
+     const navigate = useNavigate();
+ 
+     const categoryPerPage = 6;
+     const pagesVisited = pageNumber * categoryPerPage;
+     const pageCount = Math.ceil(categories.length / categoryPerPage);
 
     
 
@@ -46,7 +53,10 @@ export default function CategoryComponent() {
     
     
     }
-
+//pagintion
+    const changePage = ({ selected }) => {
+      setPageNumber(selected);
+    };
     //add popup open
     const handleAddCategory=()=>{
         console.warn("add popup open");
@@ -148,7 +158,7 @@ const handleDeleteCategory=(id)=>{
 
     //display vacancy in table
     const displayCategory = categories
-    .slice()
+    .slice(pagesVisited, pagesVisited + categoryPerPage)
     .map((category,index) => (
       <tr key={category.id}>
         <td >{index + 1}</td>
@@ -174,8 +184,7 @@ const handleDeleteCategory=(id)=>{
         return (
             <>
             <div className='category'>
-            <Card className='card' style={{ backgroundColor: 'rgba(255, 255, 255, 0.301)' }}>
-        <Card.Body>
+            
                 <div className='row'>
                     <div className='col'>
                     <div className='title'><h3>Categories</h3></div>
@@ -211,8 +220,24 @@ const handleDeleteCategory=(id)=>{
       </div>
       </div>
       
-      </Card.Body>
-    </Card>
+      <div className='row'>
+      <div className='col'>
+        <div className='pagination'>
+      <ReactPaginate
+        previousLabel={"← Previous"}
+        nextLabel={"Next →"}
+        pageCount={ pageCount }
+        onPageChange={changePage}
+        containerClassName={"pagination"}
+        previousLinkClassName={"pagination__link"}
+        nextLinkClassName={"pagination__link"}
+        disabledClassName={"pagination__link--disabled"}
+        activeClassName={"pagination__link--active"}
+      />
+      </div>
+    </div>
+               
+                </div>
       </div>
       {/* Delete Vacancy Popup */}
       {isDeletePopupOpen && (

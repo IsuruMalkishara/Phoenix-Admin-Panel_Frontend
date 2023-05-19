@@ -133,7 +133,7 @@ const closeSuccessPopup=()=>{
         </div>
         
        </div>
-       <div className='row' style={{ marginTop:'10px' }}>
+       <div className='row' style={{ marginTop:'0px' }}>
         <div className='col' style={{ textAlign:'center',color:'#FFFF' }}><h1>{title}</h1></div>
        </div>
        <div className='row' style={{ color:'#FFFF',marginTop:'10px' }}>
@@ -175,7 +175,7 @@ const closeSuccessPopup=()=>{
       <img
         src={descriptionImg}
         alt='description'
-        height={'400px'}
+        height={'350px'}
         width={'350px'}
       />
     </div>
@@ -189,6 +189,7 @@ const closeSuccessPopup=()=>{
         <DeletePopup
           confirmDeleteVacancy={confirmDeleteVacancy}
           closePopup={() => setDeletePopupOpen(false)}
+          message="Are you sure, Do you want to delete this vacancy?"
         />
       )}
 

@@ -78,8 +78,7 @@ export default function RequestComponent() {
         return (
             <>
             <div className='request'>
-            <Card className='card' style={{ backgroundColor: 'rgba(255, 255, 255, 0.301)' }}>
-        <Card.Body>
+            
                 <div className='row'>
                     <div className='col'>
                     <div className='title'><h3>{vacancy}</h3></div>
@@ -123,8 +122,7 @@ export default function RequestComponent() {
     </div>
                
                 </div>
-      </Card.Body>
-    </Card>
+      
       </div>
     </>
         );

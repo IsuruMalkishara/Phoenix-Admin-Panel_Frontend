@@ -27,5 +27,10 @@ const url='http://localhost:8081/';
     addVacancy(data){
         return axios.post(url+'vacancy',data)
     }
+
+    searchVacancy(data){
+        console.warn("text: "+data);
+        return axios.post(url+'vacancy/title',data)
+    }
 }
 export default new VacancyService
