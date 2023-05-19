@@ -1,5 +1,5 @@
 import React, { useState,useEffect } from 'react';
-import { Link,useNavigate } from 'react-router-dom';
+import { Link, useNavigate, useLocation } from 'react-router-dom';
 import { SidebarData } from './SidebarData';
 import '../styles/NavbarComponent.css';
 import { IconContext } from 'react-icons/lib';
@@ -12,6 +12,7 @@ import Profile  from '../assets/profile.png'
 export default function NavbarComponent() {
 
   const navigate = useNavigate();
+  const location = useLocation();
   
   const [sidebar, setSidebar] = useState(false);
 
@@ -51,7 +52,7 @@ const getAdmin=()=>{
 //logout
 const handleLogout = () => {
   sessionStorage.clear();
-  navigate(-2);
+  navigate('/login');
 };
 
   return (
@@ -81,17 +82,23 @@ const handleLogout = () => {
             />
           </li>
           <li className='user-name'><p>{userName}</p></li>
-            {SidebarData.map((item, index) => {
-              return (
-                <li key={index} className={item.cName}>
-                  <Link to={item.path}>
-                    <span>{item.title}</span>
-                  </Link>
-                </li>
-                
-              );
-            })}
-            
+          {SidebarData.map((item, index) => {
+  const isActive = location.pathname === item.path;
+  return (
+    <li key={index} className={item.cName}>
+      <Link to={item.path} className={isActive ? 'active' : ''}>
+        <span>{item.title}</span>
+      </Link>
+    </li>
+  );
+})}
+            <li className='nav-text'>
+                {adminType != 'Admin' && (
+              <Link to="/admin">
+                   <span>Admin</span>
+             </Link>
+                     )}
+            </li>
             <li  className='nav-text'>
                   <Link onClick={handleLogout}>
                     <span>Logout</span>

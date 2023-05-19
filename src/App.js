@@ -16,6 +16,7 @@ import CategoryComponent from './components/CategoryComponent';
 import TypeComponent from './components/TypeComponent';
 import ModalityComponent from './components/ModalityComponent';
 import EditProfileComponent from './components/EditProfileComponent';
+import AdminComponent from './components/AdminComponent';
 
 function App() {
   return (
@@ -25,7 +26,7 @@ function App() {
               
               <Routes>
               
-              <Route path="/" exact element={<LoginComponent/>}></Route>
+              <Route path="/login" exact element={<LoginComponent/>}></Route>
 
               </Routes>
 
@@ -46,7 +47,7 @@ function App() {
                   <Route path="/type" element={<> <NavbarComponent/><TypeComponent/></>}></Route>
                   <Route path="/modality" element={<> <NavbarComponent/><ModalityComponent/></>}></Route>
                   <Route path="/edit" element={<> <NavbarComponent/><EditProfileComponent/></>}></Route>
-
+                  <Route path="/admin" element={<> <NavbarComponent/><AdminComponent/></>}></Route>
               </Routes>
               </div>
       </router>

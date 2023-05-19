@@ -39,13 +39,5 @@ export const SidebarData = [
       },
       
   ];
-var adminType=sessionStorage.getItem('userType');
 
-if (adminType === 'Super Admin') {
-    SidebarData.splice(6, 0, {
-      title: 'Administrators',
-      path: '/admin',
-      cName: 'nav-text'
-    });
-  }
   

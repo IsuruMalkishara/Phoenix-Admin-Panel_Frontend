@@ -21,11 +21,11 @@ const url='http://localhost:8081/';
     }
   
     getAllAdmins(){
-      return axios.get(url+"admin")
+      return axios.get(url+"admin");
     }
   
     deleteAdmin(id){
-      return axios.delete(url+"admin/"+id)
+      return axios.delete(url+"admin/"+id);
     }
 }
 export default new AdminService
