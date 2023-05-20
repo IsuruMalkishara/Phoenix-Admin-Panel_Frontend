@@ -1,6 +1,6 @@
 import React, {useState,useEffect } from 'react';
 import { useParams,useNavigate } from 'react-router-dom';
-import { Card, Form, Button } from 'react-bootstrap';
+import { Card, Form, Button ,Alert} from 'react-bootstrap';
 import ReactQuill from 'react-quill';
 import 'react-quill/dist/quill.snow.css';
 import DatePicker from 'react-datepicker';
@@ -29,7 +29,7 @@ export default function AddVacancyComponent() {
     const [categoryList, setCategoryList] = useState([]);
     const [salaryLawLimit, setSalaryLawLimit]=useState('');
     const [salaryUpperLimit, setSalaryUpperLimit]=useState('');
-    
+    const [error, setError] = useState('');
     
     const { id } = useParams();
 
@@ -85,6 +85,28 @@ const handleDescriptionImageChange = (files) => {
 const handleAddVacancy = (event) => {
   
     event.preventDefault(); 
+    if(!title){
+      setError('Title field is required.');
+      return;
+    }else if(!categoryId){
+      setError('Category is required.');
+      return;
+    }else if(!typeId){
+      setError('Type is required.');
+      return;
+    }else if(!modalityId){
+      setError(' Modality is required.');
+      return;
+    }else if(!salaryLawLimit || !salaryUpperLimit){
+      setError('Salary law limit and salary upper limit are required.');
+      return;
+    }else if(!description && !descriptionImg){
+      setError('Description or Description Image required.');
+      return;
+    }else if(!expirationDate){
+      setError('Expiration Date is required.');
+      return;
+    }else{
 
     let range = '';
     range=salaryLawLimit + " - " + salaryUpperLimit;
@@ -115,6 +137,7 @@ const handleAddVacancy = (event) => {
     }
   })
 }
+}
 
 
 
@@ -130,6 +153,7 @@ const closeSuccessPopup=()=>{
               
             <Card className='card' style={{ backgroundColor: 'rgba(255, 255, 255, 0.301)' }}>
         <Card.Body>
+        {error && <Alert variant='danger' style={{ textAlign:'center' }}>{error}</Alert>} {/* Display error message */}
         <Form onSubmit={handleAddVacancy}>
           
         <div className='row'>

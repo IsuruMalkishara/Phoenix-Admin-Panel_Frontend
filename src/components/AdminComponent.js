@@ -95,14 +95,25 @@ const handleDeleteAdmin=(id)=>{
     .map((admin,index) => (
       <tr key={admin.id}>
         <td >{index + 1}</td>
-        <td><img
-        
-              src={admin.profilePicture}
-              alt='Profile picture'
-              height={'50px'}
-              width={'50px'}
-              className='rounded-circle profile-picture'
-            /></td>
+        <td>
+        {admin.profilePicture ? (
+          <img
+            src={admin.profilePicture}
+            alt='Profile picture'
+            height={'50px'}
+            width={'50px'}
+            className='rounded-circle profile-picture'
+          />
+        ) : (
+          <img
+            src={Profile}
+            alt='Profile picture'
+            height={'50px'}
+            width={'50px'}
+            className='rounded-circle profile-picture'
+          />
+        )}
+      </td>
         <td>{admin.userName}</td>
         <td >{admin.email}</td>
         <td >{admin.phone}</td>

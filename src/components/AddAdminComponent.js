@@ -1,6 +1,6 @@
 import React, {useState,useEffect } from 'react';
 import { useParams,useNavigate } from 'react-router-dom';
-import { Card, Form, Button } from 'react-bootstrap';
+import { Card, Form, Button,Alert } from 'react-bootstrap';
 import SuccessComponent from './SuccessComponent';
 import AdminService from '../services/AdminService';
 import '../styles/AddAdminComponent.css';
@@ -15,7 +15,7 @@ export default function AddAdminComponent() {
     const [userType,setUserType]=useState('');
     const [password,setPassword]=useState('');
     const [isSuccessPopupOpen,setSuccessPopupOpen]=useState(false);
-
+    const [error, setError] = useState('');
    
     useEffect(() => {
         
@@ -37,6 +37,31 @@ const handleProfilePictureChange = (files) => {
 //update
 const handleAdd=(event)=>{
     event.preventDefault();
+    if(!userName){
+      setError('User Name is required.');
+      return;
+    }else if(!email){
+      setError('Email Address is required.');
+      return;
+    }else if (!validateEmail(email)) {
+      setError('Invalid Email Address.');
+      return;
+    }else if(!password){
+      setError('Password is required.');
+      return;
+    }else if (password.length < 8) {
+      setError('Password should be at least 8 characters.');
+      return;
+    }else if(!phone){
+      setError(' Contact number is required.');
+      return;
+    }else if (phone.length !== 11) {
+      setError('Contact number should have 11 digits.');
+      return;
+    }else if(!userType ){
+      setError('Admin type required.');
+      return;
+    }else{
   const data={  
    
    "email":email,
@@ -57,8 +82,13 @@ const handleAdd=(event)=>{
     }
   })
 }
+}
 
-
+// Email validation using regex
+const validateEmail = (email) => {
+  const regex = /^\w+([.-]?\w+)*@\w+([.-]?\w+)*(\.\w{2,3})+$/;
+  return regex.test(email);
+};
 
 //close success popup
 const closeSuccessPopup=()=>{
@@ -77,6 +107,7 @@ const closeSuccessPopup=()=>{
               
             <Card className='card' style={{ backgroundColor: 'rgba(255, 255, 255, 0.301)' }}>
         <Card.Body>
+        {error && <Alert variant='danger' style={{ textAlign:'center' }}>{error}</Alert>} {/* Display error message */}
         <Form onSubmit={handleAdd}>
         
         <div className='row' style={{ marginTop:'10px' }}>
@@ -91,6 +122,7 @@ const closeSuccessPopup=()=>{
         <div className='row' style={{ marginTop:'10px' }}>
         <div className='col-4'><Form.Label className='label'>Email Address:</Form.Label></div>
             <div className='col-8'><Form.Control
+            placeholder='abc@gmail.com'
             className='input'
             type="text"
             value={email}
@@ -109,6 +141,7 @@ const closeSuccessPopup=()=>{
         <div className='row' style={{ marginTop:'10px' }}>
         <div className='col-4'><Form.Label className='label'>Contact Number:</Form.Label></div>
             <div className='col-8'><Form.Control
+            placeholder='94*********'
             className='input'
             type="text"
             value={phone}
@@ -142,7 +175,7 @@ const closeSuccessPopup=()=>{
         value={userType}
         onChange={(event) => setUserType(event.target.value)}
       >
-    
+         <option >select admin type</option>
         <option value={"Admin"}>Admin</option>
         <option value={"Super Admin"}>Super Admin</option>
       </Form.Control>
@@ -169,7 +202,7 @@ const closeSuccessPopup=()=>{
       {/* success  Popup */}
       {isSuccessPopupOpen && (
         <SuccessComponent
-          message="Successfully Update Profile"
+          message="Successfully Added New Admin"
           closeSuccessPopup={closeSuccessPopup}
         />
       )}
